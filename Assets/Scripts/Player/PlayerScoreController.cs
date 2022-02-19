@@ -17,6 +17,9 @@ namespace Game
 
         private void OnPlayerSpawned(Player player)
         {
+            model.Score = 0;
+            view.SetScore(model.Score);
+
             player.CollectableTrigger.Collected += OnCollected;
             player.Dead += OnDead;
 

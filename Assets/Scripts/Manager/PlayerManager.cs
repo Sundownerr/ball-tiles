@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Managers
 {
@@ -7,6 +8,8 @@ namespace Game.Managers
     {
         [SerializeField] private GameObject playerPrefab;
         [SerializeField] private LevelManager levelManager;
+        [SerializeField] private UnityEvent onPlayerSpawned;
+        [SerializeField] private UnityEvent onPlayerDead;
 
         private Player player;
         public event Action<Player> PlayerSpawned;
@@ -22,6 +25,15 @@ namespace Game.Managers
             player = playerGO.GetComponent<Player>();
 
             PlayerSpawned?.Invoke(player);
+            onPlayerSpawned?.Invoke();
+
+            player.Dead += OnDead;
+        }
+
+        private void OnDead()
+        {
+            player.Dead -= OnDead;
+            onPlayerDead?.Invoke();
         }
 
         public override void Initialize()

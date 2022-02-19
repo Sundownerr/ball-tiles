@@ -185,9 +185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 9146492985407423489}
-  checkedLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &9146492984152479623
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,7 +365,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9146492985407423489}
   - component: {fileID: 9127285711596731571}
-  - component: {fileID: 8330875491869261202}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -408,19 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94bba7f556cee2d4e9ff72523c69ea91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerScoreController: {fileID: 8330875491869261202}
+  collectableTrigger: {fileID: 9146492985378180648}
   groundChecker: {fileID: 9146492983789942531}
   cameraPoint: {fileID: 452331959876371580}
---- !u!114 &8330875491869261202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9146492985407423488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d28d5e6ccd5f354489da6e37070c732, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectableTrigger: {fileID: 9146492985378180648}
