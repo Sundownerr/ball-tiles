@@ -7,30 +7,35 @@ namespace Game.Tiles
 {
     public class TileGenerator : MonoBehaviour
     {
-        [Serializable]
-        public enum Difficulty
-        {
-            Easy = 3,
-            Medium = 2,
-            Hard = 1
-        }
-
         private const int startTilesCount = 9;
-
-        [SerializeField] private Difficulty difficulty;
         [SerializeField] private float tileSpawnDistance;
         [SerializeField] private int maxSpawnedTiles;
         [SerializeField] private Transform tileParent;
         [SerializeField] private GameObject tilePrefab;
 
         private readonly Queue<Transform> tiles = new Queue<Transform>();
+        private Difficulty difficulty;
         private Direction direction;
         private Transform lastMainTile;
         private Transform player;
 
-        private void Start()
+        private void Update()
         {
-            maxSpawnedTiles *= (int) difficulty;
+            if (tiles.Count < startTilesCount)
+                return;
+
+            var distance = Vector3.Distance(player.position, lastMainTile.position);
+
+            if (distance < tileSpawnDistance)
+            {
+                GenerateMainTile(lastMainTile.position + GetNextTilePosition(lastMainTile));
+                GenerateSideTiles(difficulty);
+            }
+        }
+
+        public void StartGenerating(Difficulty difficulty)
+        {
+            this.difficulty = difficulty;
 
             for (var i = -1; i < 2; i++)
             {
@@ -44,17 +49,6 @@ namespace Game.Tiles
             }
         }
 
-        private void Update()
-        {
-            var distance = Vector3.Distance(player.position, lastMainTile.position);
-
-            if (distance < tileSpawnDistance)
-            {
-                GenerateMainTile(lastMainTile.position + GetNextTilePosition(lastMainTile));
-                GenerateSideTiles(difficulty);
-            }
-        }
-
         public event Action<Transform> TileSpawned;
 
         public void SetPlayer(Transform player)
@@ -64,7 +58,9 @@ namespace Game.Tiles
 
         private Transform GetTile()
         {
-            var tile = tiles.Count >= maxSpawnedTiles ? tiles.Dequeue() : Instantiate(tilePrefab, tileParent).transform;
+            var tile = tiles.Count >= maxSpawnedTiles * (int) difficulty
+                ? tiles.Dequeue()
+                : Instantiate(tilePrefab, tileParent).transform;
 
             tiles.Enqueue(tile);
 

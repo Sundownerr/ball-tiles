@@ -43,7 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642de5863a007004e955c9a879fd3598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  difficulty: 3
   tileSpawnDistance: 10
   maxSpawnedTiles: 30
   tileParent: {fileID: 1247908482448447881}
@@ -91,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bca37c6994d4c34ea60d9c251f8c04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilesGeneratedToSpawn: 5
+  tilesGeneratedToSpawnCollectable: 5
   spawnType: 0
   collectablePrefab: {fileID: 2194142286595852353, guid: e329d6d628beff74db2c3239578c23e4, type: 3}
   collectableParent: {fileID: 1247908482813280929}
@@ -143,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71df80885dd4493951b4252f714905c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficulty: 2
   playerSpawnPoint: {fileID: 8149012346319366747}
   tileGenerator: {fileID: 1247908482448447880}
   tileAnimator: {fileID: 2103690089068821356}
